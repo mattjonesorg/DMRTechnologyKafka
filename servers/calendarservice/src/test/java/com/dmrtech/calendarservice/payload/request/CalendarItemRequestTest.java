@@ -9,6 +9,7 @@ import java.util.UUID;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
 
@@ -29,12 +30,15 @@ public class CalendarItemRequestTest {
     public void testGetDate() throws Throwable {
         // Given
         CalendarItemRequest underTest = new CalendarItemRequest();
+        Date d = new Date();
+        underTest.setDate(d);
 
         // When
         Date result = underTest.getDate();
 
         // Then
-        // assertNotNull(result);
+        assertNotNull(result);
+        assertEquals(d, result);
     }
 
     /**
@@ -47,12 +51,13 @@ public class CalendarItemRequestTest {
     public void testGetDetails() throws Throwable {
         // Given
         CalendarItemRequest underTest = new CalendarItemRequest();
+        underTest.setDetails("details");
 
         // When
         String result = underTest.getDetails();
 
         // Then
-        // assertEquals("", result);
+        assertEquals("details", result);
     }
 
     /**
@@ -65,12 +70,14 @@ public class CalendarItemRequestTest {
     public void testGetId() throws Throwable {
         // Given
         CalendarItemRequest underTest = new CalendarItemRequest();
+        UUID testUUID = UUID.randomUUID();
+        underTest.setId(testUUID);
 
         // When
         UUID result = underTest.getId();
 
         // Then
-        // assertEquals(0L, result);
+        assertEquals(testUUID, result);
     }
 
     /**
@@ -83,12 +90,13 @@ public class CalendarItemRequestTest {
     public void testGetTitle() throws Throwable {
         // Given
         CalendarItemRequest underTest = new CalendarItemRequest();
+        underTest.setTitle("xyz");
 
         // When
         String result = underTest.getTitle();
 
         // Then
-        // assertEquals("", result);
+        assertEquals("xyz", result);
     }
 
     /**
@@ -101,12 +109,13 @@ public class CalendarItemRequestTest {
     public void testIsAllDayEvent() throws Throwable {
         // Given
         CalendarItemRequest underTest = new CalendarItemRequest();
+        underTest.setAllDayEvent(true);
 
         // When
         boolean result = underTest.isAllDayEvent();
 
         // Then
-        // assertFalse(result);
+        assertTrue(result);
     }
 
     /**

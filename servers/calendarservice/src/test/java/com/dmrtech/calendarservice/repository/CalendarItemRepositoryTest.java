@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -34,6 +35,7 @@ public class CalendarItemRepositoryTest {
                 true,
                 "new years",
                 "new millenium details", false);
+        calendarItem.setId(UUID.randomUUID());
         entityManager.persist(calendarItem);
         entityManager.flush();
 
@@ -53,6 +55,7 @@ public class CalendarItemRepositoryTest {
                     true,
                     "new years",
                     "new millenium details", false);
+            calendarItem.setId(UUID.randomUUID());
             entityManager.persist(calendarItem);
             entityManager.flush();
         }

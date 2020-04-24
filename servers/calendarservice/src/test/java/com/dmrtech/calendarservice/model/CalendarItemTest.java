@@ -9,6 +9,7 @@ import java.util.UUID;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
 
@@ -29,12 +30,15 @@ public class CalendarItemTest {
     public void testGetDate() throws Throwable {
         // Given
         CalendarItem underTest = new CalendarItem();
+        Date d = new Date();
+        underTest.setDate(d);
 
         // When
         Date result = underTest.getDate();
 
         // Then
-        // assertNotNull(result);
+        assertNotNull(result);
+        assertEquals(d, result);
     }
 
     /**
@@ -47,12 +51,14 @@ public class CalendarItemTest {
     public void testGetID() throws Throwable {
         // Given
         CalendarItem underTest = new CalendarItem();
+        UUID testUUID = UUID.randomUUID();
+        underTest.setId(testUUID);
 
         // When
         UUID result = underTest.getID();
 
         // Then
-        // assertEquals(0L, result);
+        assertEquals(testUUID, result);
     }
 
     /**
@@ -73,24 +79,6 @@ public class CalendarItemTest {
     }
 
     /**
-     * Parasoft Jtest UTA: Test for getDate()
-     *
-     * @author dferguson
-     * @see CalendarItem#getDate()
-     */
-    @Test(timeout = 1000)
-    public void testGetDate2() throws Throwable {
-        // Given
-        CalendarItem underTest = new CalendarItem();
-
-        // When
-        Date result = underTest.getDate();
-
-        // Then
-        // assertNotNull(result);
-    }
-
-    /**
      * Parasoft Jtest UTA: Test for getDetails()
      *
      * @author dferguson
@@ -100,6 +88,7 @@ public class CalendarItemTest {
     public void testGetDetails() throws Throwable {
         // Given
         CalendarItem underTest = new CalendarItem();
+        underTest.setDetails("test string");
 
         // When
         String result = underTest.getDetails();
@@ -108,23 +97,6 @@ public class CalendarItemTest {
         // assertEquals("", result);
     }
 
-    /**
-     * Parasoft Jtest UTA: Test for getID()
-     *
-     * @author dferguson
-     * @see CalendarItem#getID()
-     */
-    @Test(timeout = 1000)
-    public void testGetID2() throws Throwable {
-        // Given
-        CalendarItem underTest = new CalendarItem();
-
-        // When
-        UUID result = underTest.getID();
-
-        // Then
-        // assertEquals(0L, result);
-    }
 
     /**
      * Parasoft Jtest UTA: Test for getTitle()
@@ -136,12 +108,13 @@ public class CalendarItemTest {
     public void testGetTitle() throws Throwable {
         // Given
         CalendarItem underTest = new CalendarItem();
+        underTest.setTitle("title");
 
         // When
         String result = underTest.getTitle();
 
         // Then
-        // assertEquals("", result);
+        assertEquals("title", result);
     }
 
     /**
@@ -154,12 +127,13 @@ public class CalendarItemTest {
     public void testIsAllDayEvent() throws Throwable {
         // Given
         CalendarItem underTest = new CalendarItem();
+        underTest.setAllDayEvent(true);
 
         // When
         boolean result = underTest.isAllDayEvent();
 
         // Then
-        // assertFalse(result);
+        assertTrue(result);
     }
 
     /**

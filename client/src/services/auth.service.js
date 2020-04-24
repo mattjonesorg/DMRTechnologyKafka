@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { userServiceHost } from './server';
+import store from '../store/index';
 
-const API_URL = userServiceHost + '/api/auth/';
+const BASE_PATH = '/api/auth/';
 
 class AuthService {
   login(user) {
     return axios
-      .post(API_URL + 'signin', {
+      .post(this.baseURL() + 'signin', {
         username: user.username,
         password: user.password
       })
@@ -24,11 +24,14 @@ class AuthService {
   }
 
   register(user) {
-    return axios.post(API_URL + 'signup', {
+    return axios.post(this.baseURL() + 'signup', {
       username: user.username,
       email: user.email,
       password: user.password
     });
+  }
+  baseURL() {
+    return store.state.hosts.user + BASE_PATH;
   }
 }
 
