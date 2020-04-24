@@ -1,14 +1,15 @@
 import axios from 'axios'
 import authHeader from './auth-header';
-import { calendarServiceHost } from './server';
+import store from '../store/index';
 
-const SERVER_URL = calendarServiceHost + '/api/calendaritems/';
+
+const BASE_QUERYSTRING_PATH = '/api/calendaritems/';
 
 
 class CalendarService {
     // (C)reate  
     createNew(text, date, completed) {
-        return axios.post(SERVER_URL, {
+        return axios.post(this.baseURL(), {
             title: text,
             date: date,
             completed: completed,
@@ -18,13 +19,13 @@ class CalendarService {
     }
     // (R)ead  
     getAll() {
-        return axios.get(SERVER_URL, {
+        return axios.get(this.baseURL(), {
             headers: authHeader()
         });
     }
     // (U)pdate  
     updateForId(id, text, date, completed) {
-        return axios.put(SERVER_URL + id, {
+        return axios.put(this.baseURL() + id, {
             title: text,
             date: date,
             completed: completed
@@ -34,9 +35,12 @@ class CalendarService {
     }
     // (D)elete  
     removeForId(id) {
-        return axios.delete(SERVER_URL + id, {
+        return axios.delete(this.baseURL() + id, {
             headers: authHeader()
         });
+    }
+    baseURL() {
+        return store.state.hosts.calendar + BASE_QUERYSTRING_PATH;
     }
 }
 

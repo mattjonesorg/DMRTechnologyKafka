@@ -1,14 +1,17 @@
 import axios from 'axios';
 import authHeader from './auth-header';
-import { userServiceHost } from './server';
+import store from '../store/index';
 
-const SERVER_URL = userServiceHost + '/api/users/';
+const BASE_PATH = '/api/users/';
 
 class UserService {
   getAll() {
-    return axios.get(SERVER_URL, {
+    return axios.get(this.baseURL(), {
         headers: authHeader()
     });
+  }
+  baseURL() {
+    return store.state.hosts.user + BASE_PATH;
   }
 }
 

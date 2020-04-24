@@ -17,17 +17,47 @@
       <strong>Email:</strong>
       {{currentUser.email}}
     </p>
-    <strong>Authorities:</strong>
-    <ul>
-      <li v-for="(role,index) in currentUser.roles" :key="index">{{role}}</li>
-    </ul>
+    <p>
+      <strong>Calendar Service URL:</strong>
+      <input
+              class="new-calendarevent"
+              autofocus
+              autocomplete="off"
+              v-model="hosts.calendar"
+              @keyup.enter="setCalendarServiceHost"
+            />
+      </p>
+<p>
+      <strong>User Service URL:</strong>
+      <input
+              class="new-calendarevent"
+              autofocus
+              autocomplete="off"
+              v-model="hosts.user"
+              @keyup.enter="setUserServiceHost"
+            />
+      </p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Profile',
+  data: function() {
+    return {
+      hosts : { 
+        calendar: this.$store.state.hosts.calendar,
+        user: this.$store.state.hosts.user
+      }
+    }
+  },
   computed: {
+    calendarServiceHost() {
+      return this.$store.state.hosts.calendar;
+    },
+    userServiceHost() {
+      return this.$store.state.hosts.user;
+    },
     currentUser() {
       return this.$store.state.auth.user;
     }
@@ -35,6 +65,14 @@ export default {
   mounted() {
     if (!this.currentUser) {
       this.$router.push('/login');
+    }
+  },
+  methods: {
+    setCalendarServiceHost() {
+      this.$store.commit('calendarServiceHost', this.hosts.calendar);
+    },
+    setUserServiceHost() {
+      this.$store.commit('userServiceHost', this.hosts.user);
     }
   }
 };
