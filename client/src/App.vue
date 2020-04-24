@@ -26,6 +26,13 @@
         </li>
       </div>
 
+      <div class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <router-link to="/settings" class="nav-link">
+            <font-awesome-icon icon="hammer" />Settings
+          </router-link>
+        </li>
+      </div>
       <div v-if="currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
           <router-link to="/profile" class="nav-link">
